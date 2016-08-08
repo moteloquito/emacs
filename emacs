@@ -43,7 +43,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "gray10" :foreground "white" :height 120 :width extra-expanded))))
+ '(default ((t (:background "gray10" :foreground "white" :height 130 :width extra-expanded))))
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "yellow")))))
 
@@ -159,10 +159,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (global-auto-complete-mode t)
-
-;; scons
-(add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
-(add-to-list 'auto-mode-alist '("SConscript" . python-mode))
 
 ;; python
 (add-hook 'python-mode-hook
