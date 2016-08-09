@@ -21,7 +21,9 @@
  '(mouse-wheel-follow-mouse t)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))))
- '(py-autopep8-options (quote ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128")))
+ '(py-autopep8-options
+   (quote
+    ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128")))
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
@@ -33,6 +35,7 @@
  '(sr-speedbar-right-side nil)
  '(tool-bar-mode nil)
  '(version-control t)
+ '(visible-bell t)
  '(web-mode-code-indent-offset 2)
  '(web-mode-disable-css-colorization t)
  '(web-mode-indent-style 2)
@@ -270,3 +273,9 @@ Key bindings:
 ;; autopep
 (require 'py-autopep8)
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+
+;; smartparens
+(require 'smartparens-config)
+(add-hook 'python-mode-hook #'smartparens-mode)
+(add-hook 'web-mode-hook #'smartparens-mode)
+(global-set-key (kbd "M-[") 'sp-backward-unwrap-sexp)
