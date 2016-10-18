@@ -6,6 +6,11 @@
  '(auto-save-file-name-transforms (quote ((".*" "/home/marcos/.emacs.d/backup" t))))
  '(backup-by-copying t)
  '(backup-directory-alist (quote ((".*" . "/home/marcos/.emacs.d/backup"))))
+ '(c-default-style
+   (quote
+    ((java-mode . "java")
+     (awk-mode . "awk")
+     (other . "k&r"))))
  '(column-number-mode 1)
  '(delete-old-versions t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
@@ -46,7 +51,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "gray10" :foreground "white" :height 130 :width extra-expanded))))
+ '(default ((t (:background "gray10" :foreground "white" :height 120 :width extra-expanded))))
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "yellow")))))
 
@@ -127,9 +132,6 @@
           (lambda ()
 	   (delete-trailing-whitespace)
 	   nil))
-
-(require 'sr-speedbar)
-(add-hook 'speedbar-mode-hook '(lambda () (linum-mode -1)))
 
 (defun insert-coding-utf ()
   "Inserts a encoding in the begining of file"
@@ -279,3 +281,29 @@ Key bindings:
 (add-hook 'python-mode-hook #'smartparens-mode)
 (add-hook 'web-mode-hook #'smartparens-mode)
 (global-set-key (kbd "M-[") 'sp-backward-unwrap-sexp)
+
+;; helm
+(require 'helm-config)
+(helm-mode 1)
+;; (define-key global-map [remap find-file] 'helm-find-files)
+(define-key global-map [remap occur] 'helm-occur)
+(define-key global-map [remap list-buffers] 'helm-buffers-list)
+(define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(unless (boundp 'completion-in-region-function)
+  (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
+  (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
+
+;; markdown
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(autoload 'gfm-mode "markdown-mode"
+  "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+
+(require 'sr-speedbar)
+(add-hook 'speedbar-mode-hook '(lambda () (linum-mode -1)))
+
