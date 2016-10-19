@@ -55,7 +55,7 @@
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "yellow")))))
 
-(add-to-list 'load-path "/opt/emacs/share/emacs/site-lisp")
+(add-to-list 'auto-mode-alist '("\\emacs\\'" . emacs-lisp-mode))
 
 (package-initialize)
 
