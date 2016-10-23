@@ -310,3 +310,5 @@ Key bindings:
 ;; swiper
 (require 'swiper-helm)
 (global-set-key (kbd "C-s") 'swiper)
+
+(fset 'yes-or-no-p 'y-or-n-p)
