@@ -307,3 +307,6 @@ Key bindings:
 (require 'sr-speedbar)
 (add-hook 'speedbar-mode-hook '(lambda () (linum-mode -1)))
 
+;; swiper
+(require 'swiper-helm)
+(global-set-key (kbd "C-s") 'swiper)
