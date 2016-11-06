@@ -312,3 +312,16 @@ Key bindings:
 (global-set-key (kbd "C-s") 'swiper)
 
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; aggresive-indent
+(require 'aggressive-indent)
+(global-aggressive-indent-mode 1)
+;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
+;; hungry delete
+(require 'hungry-delete)
+(global-hungry-delete-mode)
+
+;; undo-tree
+(require 'undo-tree)
+(global-undo-tree-mode)
