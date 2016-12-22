@@ -1,3 +1,20 @@
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+(setq use-package-always-ensure t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -26,6 +43,9 @@
  '(mouse-wheel-follow-mouse t)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))))
+ '(package-selected-packages
+   (quote
+    (hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
  '(py-autopep8-options
    (quote
     ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128")))
@@ -45,7 +65,6 @@
  '(web-mode-disable-css-colorization t)
  '(web-mode-indent-style 2)
  '(web-mode-markup-indent-offset 2))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,17 +74,9 @@
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "yellow")))))
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (add-to-list 'auto-mode-alist '("\\emacs\\'" . emacs-lisp-mode))
-
-(package-initialize)
-
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("elpy" . "https://jorgenschaefer.github.io/packages/") t)
 
 ;; backup files
 (message "Deleting old backup files...")
@@ -100,39 +111,13 @@
 (global-set-key [f12] 'sr-speedbar-toggle)
 (global-set-key [C-S-f4]
 		(lambda()
-		 (interactive)
-		 (web-mode-set-engine "django")))
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;; web-mode
-(require 'web-mode)
-(add-hook 'web-mode-hook
-          (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
-(setq-default indent-tabs-mode nil)
-(add-hook 'web-mode-hook
-	 '(lambda ()
-	    (local-set-key (kbd "C-c C-v") 'web-mode-element-close)))
-(setq web-mode-engines-alist
-      '(("django"    . "\\.dj\\.html\\'")
-	)
-      )
+                  (interactive)
+                  (web-mode-set-engine "django")))
 
 (add-hook 'local-write-file-hooks
           (lambda ()
-	   (delete-trailing-whitespace)
-	   nil))
-
+            (delete-trailing-whitespace)
+            nil))
 (defun insert-coding-utf ()
   "Inserts a encoding in the begining of file"
   (goto-char (point-min))
@@ -151,18 +136,48 @@
 
 (global-set-key [C-S-f9] 'check-and-insert-coding)
 
-(require 'fill-column-indicator)
-(add-hook 'python-mode-hook 'fci-mode)
-
 (setq auto-mode-alist
-           (cons '("\\.po\\'\\|\\.po\\." . po-mode) auto-mode-alist))
+      (cons '("\\.po\\'\\|\\.po\\." . po-mode) auto-mode-alist))
 (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 
-(require 'auto-complete)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(require 'auto-complete-config)
-(ac-config-default)
-(global-auto-complete-mode t)
+;; web-mode
+(use-package web-mode
+  :init
+  (add-hook 'web-mode-hook
+            (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
+  (setq-default indent-tabs-mode nil)
+  (add-hook 'web-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-c C-v") 'web-mode-element-close)))
+  (setq web-mode-engines-alist
+        '(("django"    . "\\.dj\\.html\\'")
+          )
+        )
+  )
+
+;; fill-column-indicator
+(use-package fill-column-indicator
+  :init
+  (add-hook 'python-mode-hook 'fci-mode)
+  )
+
+(use-package auto-complete
+  :init
+  ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+  (ac-config-default)
+  (global-auto-complete-mode t)
+  )
 
 ;; python
 (add-hook 'python-mode-hook
@@ -273,55 +288,67 @@ Key bindings:
 (global-set-key (kbd "M-<right>") 'toggle-window-split)
 
 ;; autopep
-(require 'py-autopep8)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(use-package py-autopep8
+  :init
+  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  )
 
 ;; smartparens
-(require 'smartparens-config)
-(add-hook 'python-mode-hook #'smartparens-mode)
-(add-hook 'web-mode-hook #'smartparens-mode)
-(global-set-key (kbd "M-[") 'sp-backward-unwrap-sexp)
+(use-package smartparens
+  :init
+  (add-hook 'python-mode-hook #'smartparens-mode)
+  (add-hook 'web-mode-hook #'smartparens-mode)
+  (global-set-key (kbd "M-[") 'sp-backward-unwrap-sexp)
+  )
 
 ;; helm
-(require 'helm-config)
-(helm-mode 1)
-;; (define-key global-map [remap find-file] 'helm-find-files)
-(define-key global-map [remap occur] 'helm-occur)
-(define-key global-map [remap list-buffers] 'helm-buffers-list)
-(define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(unless (boundp 'completion-in-region-function)
-  (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
-  (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
+(use-package helm
+  :init
+  (helm-mode 1)
+  ;; (define-key global-map [remap find-file] 'helm-find-files)
+  (define-key global-map [remap occur] 'helm-occur)
+  (define-key global-map [remap list-buffers] 'helm-buffers-list)
+  (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (unless (boundp 'completion-in-region-function)
+    (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
+    (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
+  )
 
 ;; markdown
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(use-package markdown-mode
+  :init
+  (autoload 'markdown-mode "markdown-mode"
+    "Major mode for editing Markdown files" t)
+  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  (autoload 'gfm-mode "markdown-mode"
+    "Major mode for editing GitHub Flavored Markdown files" t)
+  (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+  )
 
-(autoload 'gfm-mode "markdown-mode"
-  "Major mode for editing GitHub Flavored Markdown files" t)
-(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
-
-(require 'sr-speedbar)
-(add-hook 'speedbar-mode-hook '(lambda () (linum-mode -1)))
+;; sr-speedbar
+(use-package sr-speedbar
+  :init
+  (add-hook 'speedbar-mode-hook '(lambda () (linum-mode -1)))
+  )
 
 ;; swiper
-(require 'swiper-helm)
-(global-set-key (kbd "C-s") 'swiper)
-
-(fset 'yes-or-no-p 'y-or-n-p)
+(use-package swiper-helm
+  :init
+  (global-set-key (kbd "C-s") 'swiper)
+  )
 
 ;; aggresive-indent
-(require 'aggressive-indent)
-(global-aggressive-indent-mode 1)
-;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+(use-package aggressive-indent
+  :init
+  (global-aggressive-indent-mode 1)
+  ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  )
 
 ;; hungry delete
-(require 'hungry-delete)
-(global-hungry-delete-mode)
+(use-package hungry-delete
+  :init
+  (global-hungry-delete-mode)
+  )
 
-;; undo-tree
-(require 'undo-tree)
-(global-undo-tree-mode)
