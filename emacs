@@ -45,7 +45,7 @@
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))))
  '(package-selected-packages
    (quote
-    (hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
+    (magit hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
  '(py-autopep8-options
    (quote
     ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128")))
@@ -139,6 +139,11 @@
 (setq auto-mode-alist
       (cons '("\\.po\\'\\|\\.po\\." . po-mode) auto-mode-alist))
 (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
+
+;; magit
+(use-package magit
+  :bind ("C-x g" . magit-status)
+  )
 
 ;; web-mode
 (use-package web-mode
