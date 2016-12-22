@@ -147,24 +147,15 @@
 
 ;; web-mode
 (use-package web-mode
-  :init
+  :mode ("\\.as[cp]x\\'" "\\.djhtml\\'" "\\.erb\\'"
+         "\\.html?\\'" "\\.js\\'" "\\.json\\'"
+         "\\.jsp\\'" "\\.mustache\\'" "\\.php\\'"
+         "\\.phtml\\'" "\\.tpl\\'")
+  :bind ("C-c C-v" . web-mode-element-close)
+  :config
   (add-hook 'web-mode-hook
             (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
   (setq-default indent-tabs-mode nil)
-  (add-hook 'web-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-c C-v") 'web-mode-element-close)))
   (setq web-mode-engines-alist
         '(("django"    . "\\.dj\\.html\\'")
           )
@@ -173,12 +164,12 @@
 
 ;; fill-column-indicator
 (use-package fill-column-indicator
-  :init
+  :config
   (add-hook 'python-mode-hook 'fci-mode)
   )
 
 (use-package auto-complete
-  :init
+  :config
   ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
   (ac-config-default)
   (global-auto-complete-mode t)
@@ -294,35 +285,35 @@ Key bindings:
 
 ;; autopep
 (use-package py-autopep8
-  :init
+  :config
   (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
   )
 
 ;; smartparens
 (use-package smartparens
-  :init
+  :config
   (add-hook 'python-mode-hook #'smartparens-mode)
   (add-hook 'web-mode-hook #'smartparens-mode)
-  (global-set-key (kbd "M-[") 'sp-backward-unwrap-sexp)
+  :bind ("M-[" . sp-backward-unwrap-sexp)
   )
 
 ;; helm
 (use-package helm
-  :init
+  :config
   (helm-mode 1)
   ;; (define-key global-map [remap find-file] 'helm-find-files)
   (define-key global-map [remap occur] 'helm-occur)
   (define-key global-map [remap list-buffers] 'helm-buffers-list)
   (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
-  (global-set-key (kbd "M-x") 'helm-M-x)
   (unless (boundp 'completion-in-region-function)
     (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
     (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
+  :bind ("M-x" . helm-M-x)
   )
 
 ;; markdown
 (use-package markdown-mode
-  :init
+  :config
   (autoload 'markdown-mode "markdown-mode"
     "Major mode for editing Markdown files" t)
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -334,26 +325,25 @@ Key bindings:
 
 ;; sr-speedbar
 (use-package sr-speedbar
-  :init
+  :config
   (add-hook 'speedbar-mode-hook '(lambda () (linum-mode -1)))
   )
 
 ;; swiper
 (use-package swiper-helm
-  :init
-  (global-set-key (kbd "C-s") 'swiper)
+  :bind ("C-s" . swiper)
   )
 
 ;; aggresive-indent
 (use-package aggressive-indent
-  :init
+  :config
   (global-aggressive-indent-mode 1)
   ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   )
 
 ;; hungry delete
 (use-package hungry-delete
-  :init
+  :config
   (global-hungry-delete-mode)
   )
 
