@@ -45,7 +45,7 @@
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))))
  '(package-selected-packages
    (quote
-    (magit hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
+    (editorconfig flymake-python-pyflakes magit hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
  '(py-autopep8-options
    (quote
     ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128")))
@@ -139,6 +139,10 @@
 (setq auto-mode-alist
       (cons '("\\.po\\'\\|\\.po\\." . po-mode) auto-mode-alist))
 (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
+
+
+;; flymake-python-pyflakes
+(use-package flymake-python-pyflakes)
 
 ;; magit
 (use-package magit
@@ -339,6 +343,7 @@ Key bindings:
   :config
   (global-aggressive-indent-mode 1)
   ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
   )
 
 ;; hungry delete
@@ -347,3 +352,8 @@ Key bindings:
   (global-hungry-delete-mode)
   )
 
+;; Editor config
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
