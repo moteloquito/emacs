@@ -357,3 +357,13 @@ Key bindings:
   :ensure t
   :config
   (editorconfig-mode 1))
+
+
+;; git gugger
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode t)
+  (git-gutter:linum-setup)
+  ;; Stage current hunk
+  (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+  )
