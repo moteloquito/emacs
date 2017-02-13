@@ -362,3 +362,13 @@ Key bindings:
 (use-package typescript-mode
   :mode "\\.ts\\'"
   )
+
+;; Docker
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'"
+  )
+
+;; yaml
+(use-package yaml-mode
+  :mode "\\.yml\\'"
+  )
