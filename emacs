@@ -110,10 +110,6 @@
 (global-set-key [f11] 'next-multiframe-window)
 (global-set-key [C-f4] 'kill-buffer-and-window)
 (global-set-key [f12] 'sr-speedbar-toggle)
-(global-set-key [C-S-f4]
-		(lambda()
-                  (interactive)
-                  (web-mode-set-engine "django")))
 
 (add-hook 'local-write-file-hooks
           (lambda ()
@@ -165,6 +161,10 @@
         '(("django"    . "\\.dj\\.html\\'")
           )
         )
+  (global-set-key [C-S-f4]
+                  (lambda()
+                    (interactive)
+                    (web-mode-set-engine "django")))
   )
 
 ;; fill-column-indicator
@@ -237,15 +237,18 @@ Key bindings:
 (defun move-line (n)
   "Move the current line up or down by N lines."
   (interactive "p")
-  (setq col (current-column))
-  (beginning-of-line) (setq start (point))
-  (end-of-line) (forward-char) (setq end (point))
-  (let ((line-text (delete-and-extract-region start end)))
+  (defvar myemacs-col)
+  (defvar myemacs-start)
+  (defvar myemacs-end)
+  (setq myemacs-col (current-column))
+  (beginning-of-line) (setq myemacs-start (point))
+  (end-of-line) (forward-char) (setq myemacs-end (point))
+  (let ((line-text (delete-and-extract-region myemacs-start myemacs-end)))
     (forward-line n)
     (insert line-text)
     ;; restore point to original column in moved line
     (forward-line -1)
-    (forward-char col)))
+    (forward-char myemacs-col)))
 
 (defun move-line-up (n)
   "Move the current line up by N lines."
