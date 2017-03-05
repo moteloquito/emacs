@@ -31,6 +31,7 @@
  '(column-number-mode 1)
  '(delete-old-versions t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
+ '(ediff-split-window-function (quote split-window-horizontally))
  '(fci-rule-color "gray20")
  '(fci-rule-column 79)
  '(flymake-start-syntax-check-on-newline nil)
