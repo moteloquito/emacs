@@ -46,10 +46,10 @@
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))))
  '(package-selected-packages
    (quote
-    (editorconfig flymake-python-pyflakes magit hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
+    (typescript-mode editorconfig flymake-python-pyflakes magit hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
  '(py-autopep8-options
    (quote
-    ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128")))
+    ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128,F821")))
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
@@ -359,6 +359,20 @@ Key bindings:
   :config
   (editorconfig-mode 1))
 
+;; Typescript
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  )
+
+;; Docker
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'"
+  )
+
+;; yaml
+(use-package yaml-mode
+  :mode "\\.yml\\'"
+  )
 
 ;; git gugger
 (use-package git-gutter
