@@ -29,12 +29,14 @@
      (awk-mode . "awk")
      (other . "k&r"))))
  '(column-number-mode 1)
+ '(custom-enabled-themes (quote (spacemacs-dark)))
  '(delete-old-versions t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
  '(ediff-split-window-function (quote split-window-horizontally))
  '(fci-rule-color "gray20")
  '(fci-rule-column 79)
  '(flymake-start-syntax-check-on-newline nil)
+ '(git-gutter:update-interval 2)
  '(global-linum-mode 1)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -384,4 +386,8 @@ Key bindings:
   (git-gutter:linum-setup)
   ;; Stage current hunk
   (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+  )
+
+(use-package spacemacs-theme
+  :ensure t
   )
