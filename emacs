@@ -388,6 +388,4 @@ Key bindings:
   (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
   )
 
-(use-package spacemacs-theme
-  :ensure t
-  )
+;; (require 'spacemacs-dark-theme)
