@@ -379,7 +379,7 @@ Key bindings:
   :mode "\\.yml\\'"
   )
 
-;; git gugger
+;; git gutter
 (use-package git-gutter
   :config
   (global-git-gutter-mode t)
