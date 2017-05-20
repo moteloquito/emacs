@@ -388,4 +388,10 @@ Key bindings:
   (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
   )
 
+(use-package s)
+(use-package powerline)
+
+(require 'spaceline-config)
+(spaceline-emacs-theme)
+
 ;; (require 'spacemacs-dark-theme)
