@@ -395,3 +395,10 @@ Key bindings:
 (spaceline-emacs-theme)
 
 ;; (require 'spacemacs-dark-theme)
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  )
+
