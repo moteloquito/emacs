@@ -398,6 +398,9 @@ Key bindings:
 
 (use-package projectile
   :ensure t
+  :init
+  (setq projectile-completion-system 'helm)
+  (setq projectile-enable-caching t)
   :config
   (projectile-global-mode)
   )
