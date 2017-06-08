@@ -309,6 +309,7 @@ Key bindings:
 
 ;; helm
 (use-package helm
+  :ensure t
   :config
   (helm-mode 1)
   ;; (define-key global-map [remap find-file] 'helm-find-files)
