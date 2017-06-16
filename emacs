@@ -406,3 +406,26 @@ Key bindings:
   (projectile-global-mode)
   )
 
+;; ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired" (mode . dired-mode))
+               ("org" (name ."^.*org$"))
+               ("web" (mode . web-mode))
+               ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+               ("programming" (or
+                               (mode . python-mode)
+                               (mode . c++-mode)
+                               (mode . c-mode)
+                               ))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")
+                         (mode . "emacs-lisp")))
+               ))))
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-auto-mode 1)
+            (ibuffer-switch-to-saved-filter-groups "default")))
+
