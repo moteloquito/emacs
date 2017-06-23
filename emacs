@@ -396,7 +396,7 @@ Key bindings:
 (spaceline-emacs-theme)
 
 ;; (require 'spacemacs-dark-theme)
-
+(require 'helm)
 (use-package projectile
   :ensure t
   :init
