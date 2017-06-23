@@ -432,3 +432,6 @@ Key bindings:
             (ibuffer-auto-mode 1)
             (ibuffer-switch-to-saved-filter-groups "default")))
 
+(require 'myfunctions)
+(global-set-key [C-F9] 'myfunctions-parse-json)
+
