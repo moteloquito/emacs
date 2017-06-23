@@ -425,7 +425,7 @@ Key bindings:
                ("emacs" (or
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$")
-                         (mode . "emacs-lisp")))
+                         (mode . emacs-lisp-mode)))
                ))))
 (add-hook 'ibuffer-mode-hook
           (lambda ()
