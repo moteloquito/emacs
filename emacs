@@ -297,6 +297,9 @@ Key bindings:
 (use-package py-autopep8
   :config
   (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  (setq py-autopep8-options
+   (quote
+    ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128,F821 --aggressive --aggressive")))
   )
 
 ;; smartparens
