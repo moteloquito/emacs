@@ -79,6 +79,7 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'auto-mode-alist '("\\emacs\\'" . emacs-lisp-mode))
 
 ;; backup files
@@ -110,7 +111,7 @@
 
 (global-set-key [C-f11] 'previous-multiframe-window)
 (global-set-key [f11] 'next-multiframe-window)
-(global-set-key [C-f4] 'kill-buffer-and-window)
+(global-set-key [f9] 'kill-buffer-and-window)
 (global-set-key [f12] 'sr-speedbar-toggle)
 
 (add-hook 'local-write-file-hooks
