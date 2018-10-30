@@ -38,7 +38,7 @@
  '(flymake-start-syntax-check-on-newline nil)
  '(gdb-many-windows t)
  '(git-gutter:update-interval 2)
- '(global-linum-mode 1)
+ '(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message ";; scratch")
