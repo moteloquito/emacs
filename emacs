@@ -23,13 +23,9 @@
  '(auto-save-file-name-transforms (quote ((".*" "/home/marcos/.emacs.d/backup" t))))
  '(backup-by-copying t)
  '(backup-directory-alist (quote ((".*" . "/home/marcos/.emacs.d/backup"))))
- '(c-default-style
-   (quote
-    ((java-mode . "java")
-     (awk-mode . "awk")
-     (other . "k&r"))))
+ '(c-basic-offset 4)
+ '(c-default-style "linux")
  '(column-number-mode 1)
- '(custom-enabled-themes (quote (spacemacs-dark)))
  '(delete-old-versions t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
  '(ediff-split-window-function (quote split-window-horizontally))
