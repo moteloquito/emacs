@@ -178,6 +178,8 @@
 (use-package fill-column-indicator
   :config
   (add-hook 'python-mode-hook 'fci-mode)
+  (add-hook 'yaml-mode-hook 'fci-mode)
+  (add-hook 'markdown-mode-hook 'fci-mode)
   )
 
 (use-package auto-complete
