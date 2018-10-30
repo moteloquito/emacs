@@ -354,12 +354,12 @@ Key bindings:
   )
 
 ;; aggresive-indent
-(use-package aggressive-indent
-  :config
-  (global-aggressive-indent-mode 1)
-  ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
-  )
+;; (use-package aggressive-indent
+;;   :config
+;;   (global-aggressive-indent-mode 1)
+;;   ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+;;   (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
+;;   )
 
 ;; hungry delete
 (use-package hungry-delete
