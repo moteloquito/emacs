@@ -453,3 +453,11 @@ Key bindings:
   (when (and (not popup-instances) sanityinc/fci-mode-suppressed)
     (setq sanityinc/fci-mode-suppressed nil)
     (turn-on-fci-mode)))
+
+(use-package visual-regexp
+  :bind (
+         ("C-c r" . vr/replace)
+         ("C-c q" . vr/query-replace)
+         )
+  )
+
