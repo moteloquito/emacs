@@ -36,6 +36,7 @@
  '(fci-rule-color "gray20")
  '(fci-rule-column 79)
  '(flymake-start-syntax-check-on-newline nil)
+ '(gdb-many-windows t)
  '(git-gutter:update-interval 2)
  '(global-linum-mode 1)
  '(indent-tabs-mode nil)
