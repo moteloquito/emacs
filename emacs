@@ -44,6 +44,8 @@
  '(initial-scratch-message ";; scratch")
  '(kept-new-versions 6)
  '(kept-old-versions 2)
+ '(magit-diff-hide-trailing-cr-characters t)
+ '(magit-diff-refine-hunk (quote all))
  '(mouse-wheel-follow-mouse t)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))))
