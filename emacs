@@ -125,7 +125,9 @@
 (defun insert-coding-utf ()
   "Inserts a encoding in the begining of file"
   (goto-char (point-min))
-  (insert "# -*- coding: utf-8 -*-\n"))
+  (insert "# -*- coding: utf-8 -*-\n")
+  (goto-char (point-min))
+  (forward-line 1))
 
 (defun has-coding ()
   "Checks if file has encoding inserted"
