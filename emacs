@@ -113,10 +113,10 @@
 (global-set-key [f7] 'yank)
 (global-set-key [f8] 'goto-line)
 
-(global-set-key [C-f11] 'previous-multiframe-window)
-(global-set-key [f11] 'next-multiframe-window)
+;; (global-set-key [C-f11] 'previous-multiframe-window)
+;; (global-set-key [f11] 'next-multiframe-window)
 (global-set-key [f9] 'kill-buffer-and-window)
-(global-set-key [f12] 'sr-speedbar-toggle)
+(global-set-key [f11] 'sr-speedbar-toggle)
 
 (add-hook 'local-write-file-hooks
           (lambda ()
@@ -463,6 +463,13 @@ Key bindings:
   :bind (
          ("C-c r" . vr/replace)
          ("C-c q" . vr/query-replace)
+         )
+  )
+
+(use-package switch-window
+  :ensure t
+  :bind (
+         ([f12] . switch-window)
          )
   )
 
