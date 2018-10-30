@@ -48,6 +48,7 @@
  '(package-selected-packages
    (quote
     (typescript-mode editorconfig flymake-python-pyflakes magit hungry-delete aggressive-indent swiper-helm markdown-mode helm smartparens web-mode sr-speedbar use-package)))
+ '(projectile-globally-ignored-files (quote ("TAGS" "*.pyc")))
  '(py-autopep8-options
    (quote
     ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128,F821")))
