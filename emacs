@@ -437,6 +437,8 @@ Key bindings:
             (ibuffer-auto-mode 1)
             (ibuffer-switch-to-saved-filter-groups "default")))
 
+(global-set-key (kbd "C-c C-S-r")  'myfunctions-rename-file-and-buffer)
+
 (require 'myfunctions)
 (global-set-key [C-F9] 'myfunctions-parse-json)
 
