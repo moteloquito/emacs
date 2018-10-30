@@ -111,6 +111,7 @@
 (global-set-key [C-S-f5] 'revert-buffer)
 (global-set-key [f6] 'kill-region)
 (global-set-key [f7] 'yank)
+(global-set-key [f8] 'goto-line)
 
 (global-set-key [C-f11] 'previous-multiframe-window)
 (global-set-key [f11] 'next-multiframe-window)
