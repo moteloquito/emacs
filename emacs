@@ -202,8 +202,6 @@
 (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 (add-to-list 'auto-mode-alist '("SConscript" . python-mode))
 
-(add-hook 'python-mode-hook
-          (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 ;; flymake
 (defvar my-flymake-minor-mode-map
