@@ -388,6 +388,9 @@ Key bindings:
   :mode "\\.yaml\\'"
   )
 
+(add-hook 'yaml-mode-hook
+          (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
 ;; git gutter
 (use-package git-gutter
   :config
