@@ -20,11 +20,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-hscroll-mode (quote current-line))
  '(auto-save-file-name-transforms (quote ((".*" "/home/marcos/.emacs.d/backup" t))))
  '(backup-by-copying t)
  '(backup-directory-alist (quote ((".*" . "/home/marcos/.emacs.d/backup"))))
  '(c-basic-offset 4)
- '(c-default-style "linux")
+ '(c-default-style
+   (quote
+    ((java-mode . "java")
+     (awk-mode . "awk")
+     (other . "k&r"))))
  '(column-number-mode 1)
  '(delete-old-versions t)
  '(ediff-merge-split-window-function (quote split-window-vertically))
@@ -34,6 +39,7 @@
  '(flymake-start-syntax-check-on-newline nil)
  '(gdb-many-windows t)
  '(git-gutter:update-interval 2)
+ '(global-aggressive-indent-mode nil)
  '(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -470,3 +476,15 @@ Key bindings:
          )
   )
 
+(defun my-c++-mode-hook ()
+  (setq c-basic-offset 4)
+  (c-set-offset 'substatement-open 0))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+;;(add-hook 'markdown-mode-hook '(lambda () (setq fill-column 79)))
+;;(add-hook 'markdown-mode-hook 'auto-fill-mode)
+
+
+(defun compile-in-dir (command)
+  (interactive "sCommand: ")
+  (let ((default-directory "/home/marcos/irobot/brewst"))
+    (compile command)))
