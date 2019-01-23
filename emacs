@@ -40,7 +40,6 @@
  '(gdb-many-windows t)
  '(git-gutter:update-interval 2)
  '(global-aggressive-indent-mode nil)
- '(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message ";; scratch")
@@ -400,7 +399,7 @@ Key bindings:
 (use-package git-gutter
   :config
   (global-git-gutter-mode t)
-  (git-gutter:linum-setup)
+  ;; (git-gutter:linum-setup)
   ;; Stage current hunk
   (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
   )
@@ -488,3 +487,8 @@ Key bindings:
   (interactive "sCommand: ")
   (let ((default-directory "/home/marcos/irobot/brewst"))
     (compile command)))
+
+(when (version<= "26.0.50" emacs-version)
+  (global-display-line-numbers-mode))
+(when (not (version<= "26.0.50" emacs-version))
+  (global-linum-mode t))
