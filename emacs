@@ -79,8 +79,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "gray10" :foreground "white" :height 120 :width extra-expanded))))
- '(flymake-errline ((((class color)) (:underline "red"))))
- '(flymake-warnline ((((class color)) (:underline "yellow")))))
+ '(flymake-errline ((((class color)) (:underline "red"))) t)
+ '(flymake-warnline ((((class color)) (:underline "yellow"))) t))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
