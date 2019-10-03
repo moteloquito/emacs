@@ -421,6 +421,14 @@ Key bindings:
   (projectile-global-mode)
   )
 
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on)
+  )
+
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
