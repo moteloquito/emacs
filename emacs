@@ -492,3 +492,11 @@ Key bindings:
   (global-display-line-numbers-mode))
 (when (not (version<= "26.0.50" emacs-version))
   (global-linum-mode t))
+
+(use-package python-black
+  :demand t
+  :bind (
+         ("C-c b b" . python-black-buffer)
+         ("C-c b r" . python-black-region)
+         )
+  :after python)
