@@ -206,6 +206,10 @@
 (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 (add-to-list 'auto-mode-alist '("SConscript" . python-mode))
 
+(use-package flymake-cursor
+  :load-path "~/.emacs.d/lisp/emacs-flymake-cursor" ;; cloned repo path
+  :config
+  (flymake-cursor-mode))
 
 ;; flymake
 (defvar my-flymake-minor-mode-map
@@ -214,23 +218,6 @@
     (define-key map "\M-n" 'flymake-goto-next-error)
     map)
   "Keymap for my flymake minor mode.")
-
-(defun my-flymake-err-at (pos)
-  (let ((overlays (overlays-at pos)))
-    (remove nil
-            (mapcar (lambda (overlay)
-                      (and (overlay-get overlay 'flymake-overlay)
-                           (overlay-get overlay 'help-echo)))
-                    overlays))))
-
-(defun my-flymake-err-echo ()
-  (message "%s" (mapconcat 'identity (my-flymake-err-at (point)) "\n")))
-
-(defadvice flymake-goto-next-error (after display-message activate compile)
-  (my-flymake-err-echo))
-
-(defadvice flymake-goto-prev-error (after display-message activate compile)
-  (my-flymake-err-echo))
 
 (define-minor-mode my-flymake-minor-mode
   "Simple minor mode which adds some key bindings for moving to the next and previous errors.
