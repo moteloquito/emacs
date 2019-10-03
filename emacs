@@ -57,6 +57,8 @@
  '(py-autopep8-options
    (quote
     ("--ignore=E101,E121,E122,E123,E124,E125,E126,E127,E128,F821")))
+ '(python-black-extra-args (quote ("-l79")))
+ '(python-shell-interpreter "python3")
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
