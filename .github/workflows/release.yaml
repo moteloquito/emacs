@@ -38,8 +38,11 @@ jobs:
       - name: deploying firmware update lambda
         run: echo "Deploy firware update lambda"
         if: |
-          ${{ toJSON(steps.pr-labels.outputs.labels) == '{}' }}
-          contains(steps.pr-labels.outputs.labels, 'build-firmware-update-lambda')
+          ${{
+            toJSON(steps.pr-labels.outputs.labels) == '{}'
+            ||
+            contains(steps.pr-labels.outputs.labels, 'build-firmware-update-lambda')
+          }}
     
   build-create-release-lambda:
     name: create release lambda
@@ -56,7 +59,9 @@ jobs:
       - name: Creating release
         run: echo "Creating release"
         if: |
-          ${{ toJSON(steps.pr-labels.outputs.labels) == '{}' }}
-          ||
-          contains(steps.pr-labels.outputs.labels, 'build-create-release-lambda')
+          ${{
+            toJSON(steps.pr-labels.outputs.labels) == '{}' 
+            ||
+            contains(steps.pr-labels.outputs.labels, 'build-create-release-lambda')
+          }}
     
