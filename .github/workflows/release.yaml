@@ -1,0 +1,88 @@
+name: deploy
+on:
+  push:
+    branches:
+      - "release"
+  workflow_dispatch:
+    inputs:
+      dex-app:
+        description: The ID of the dex app
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - firmware-update-lambda
+          - create-release-lambda
+
+jobs:
+  detect-label:
+    name: detects pull request label
+    runs-on: ubuntu-latest
+    outputs:
+      target: ${{ steps.get.outputs.target }}
+      has_label: ${{ steps.get.outputs.has_label }}
+    steps:
+      - name: Detect build label
+        id: get
+        run: |
+          LABELS="${{ join(github.event.pull_request.labels.*.name, ' ') }}"
+
+          if [[ -z "$LABELS" ]]; then
+            echo "has_label=false" >> $GITHUB_OUTPUT
+            echo "target=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          for label in $LABELS; do
+            if [[ "$label" == build:* ]]; then
+              job="${label#build:}"
+              echo "has_label=true" >> $GITHUB_OUTPUT
+              echo "target=$job" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          done
+
+          echo "has_label=false" >> $GITHUB_OUTPUT
+          echo "target=" >> $GITHUB_OUTPUT
+
+  setup-workspace:
+    name: setting up workspace
+    needs: detect-label
+    runs-on: ubuntu-latest
+    steps:
+      - name: sey hello
+        run: echo "Hola mundo!"
+
+  build-firmware-update-lambda:
+    name: build firmware update lambda
+    if: |
+      github.event.inputs.dex-app == 'firmware-update-lambda' || github.event.inputs.dex-app == ''
+      &&
+      (
+        github.event_name == 'push' ||
+        needs.detect-label.outputs.has_label == 'false' ||
+        needs.detect-label.outputs.target == 'firmware-update-lambda'
+      )
+    runs-on: ubuntu-latest
+    needs: setup-workspace
+    steps:
+      - name: deploying firmware update lambda
+        run: echo "Deploy firware update lambda"
+    
+  build-create-release-lambda:
+    name: build firmware update lambda
+    if: |
+      github.event.inputs.dex-app == 'firmware-update-lambda' || github.event.inputs.dex-app == ''
+      &&
+      (
+        github.event_name == 'push' ||
+        needs.detect-label.outputs.has_label == 'false' ||
+        needs.detect-label.outputs.target == 'create-release-lambda'
+      )
+    runs-on: ubuntu-latest
+    needs: setup-workspace
+    steps:
+      - name: Creating release
+        run: echo "Creating release"
+    
