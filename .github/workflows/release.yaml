@@ -18,7 +18,6 @@ on:
 jobs:
   setup-workspace:
     name: setting up workspace
-    needs: detect-label
     runs-on: ubuntu-latest
     steps:
       - name: sey hello
