@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - "release"
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+    branches:
+      - release
   workflow_dispatch:
     inputs:
       dex-app:
@@ -71,9 +75,11 @@ jobs:
         run: echo "Deploy firware update lambda"
     
   build-create-release-lambda:
-    name: build firmware update lambda
+    name: create release lambda
     if: |
-      github.event.inputs.dex-app == 'firmware-update-lambda' || github.event.inputs.dex-app == ''
+      (
+        github.event.inputs.dex-app == 'create-release-lambda' || github.event.inputs.dex-app == ''
+      )
       &&
       (
         github.event_name == 'push' ||
