@@ -1,12 +1,9 @@
 name: deploy
 on:
   push:
-    branches:
-      - "release"
-  pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
     branches:
-      - release
+      - "release"
   workflow_dispatch:
     inputs:
       dex-app:
