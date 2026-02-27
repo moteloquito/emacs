@@ -20,7 +20,7 @@ jobs:
     name: setting up workspace
     runs-on: ubuntu-latest
     outputs:
-      labels: ${{ stepts.pr-labels.outputs.labels }}
+      labels: ${{ steps.pr-labels.outputs.labels }}
     steps:
       - name: Get PR labels
         id: pr-labels
