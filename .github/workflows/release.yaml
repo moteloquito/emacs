@@ -1,7 +1,6 @@
 name: deploy
 on:
   push:
-    types: [opened, synchronize, reopened, labeled, unlabeled]
     branches:
       - "release"
   workflow_dispatch:
