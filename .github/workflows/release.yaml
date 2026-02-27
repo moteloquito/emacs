@@ -49,7 +49,7 @@ jobs:
   setup-workspace:
     name: setting up workspace
     needs: detect-label
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: sey hello
         run: echo "Hola mundo!"
@@ -64,7 +64,7 @@ jobs:
         needs.detect-label.outputs.has_label == 'false' ||
         needs.detect-label.outputs.target == 'firmware-update-lambda'
       )
-    runs-on: firmware
+    runs-on: ubuntu-latest
     needs: setup-workspace
     steps:
       - name: deploying firmware update lambda
@@ -80,7 +80,7 @@ jobs:
         needs.detect-label.outputs.has_label == 'false' ||
         needs.detect-label.outputs.target == 'create-release-lambda'
       )
-    runs-on: firmware
+    runs-on: ubuntu-latest
     needs: setup-workspace
     steps:
       - name: Creating release
