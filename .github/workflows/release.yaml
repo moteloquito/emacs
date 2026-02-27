@@ -33,6 +33,8 @@ jobs:
       - name: Get PR labels
         id: pr-labels
         uses: irby/get-labels-on-push@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: deploying firmware update lambda
         run: echo "Deploy firware update lambda"
         if: steps.pr-labels.outputs.labels == '[]' || contains(steps.pr-labels.outputs.labels, 'build:firmware-update-lambda')
@@ -47,6 +49,8 @@ jobs:
       - name: Get PR labels
         id: pr-labels
         uses: irby/get-labels-on-push@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Creating release
         run: echo "Creating release"
         if: steps.pr-labels.outputs.labels == '[]' || contains(steps.pr-labels.outputs.labels, 'build:create-release-lambda')
