@@ -20,7 +20,7 @@ jobs:
     name: setting up workspace
     runs-on: ubuntu-latest
     outputs:
-      labels: ${{ steps.pr-labels.outputs.labels }}
+      labels: ${{steps.pr-labels.outputs.labels}}
     steps:
       - name: Get PR labels
         id: pr-labels
@@ -37,7 +37,7 @@ jobs:
       github.event.inputs.dex-app == 'firmware-update-lambda' || github.event.inputs.dex-app == ''
       &&
       (
-        toJSON(needs.setup-workspace.outputs.labels) == '{}'
+        toJSON(needs.setup-workspace.outputs.labels) == ''
         ||
         contains(needs.setup-workspace.outputs.labels, 'build-firmware-update-lambda')
       )
